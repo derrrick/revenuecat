@@ -1,0 +1,258 @@
+/* Full page wraps in one Paper card (shell provides that). Revenue view
+   is a 2-column layout inside the Paper: ChartList sidebar + content. */
+
+.rv {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  min-height: 0;
+  flex: 1;
+}
+
+.rv__right {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Breadcrumb header */
+.rv__header {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--surface-secondary);
+  flex-shrink: 0;
+}
+
+.rv__breadcrumb ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.rv__breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+}
+
+.rv__breadcrumb a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 100ms ease;
+}
+
+.rv__breadcrumb a:hover {
+  color: var(--text-primary);
+}
+
+.rv__breadcrumb a.is-active {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.rv__bc-sep {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* Body */
+.rv__body {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Title row */
+.rv__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.rv__title-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rv__title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.rv__info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: var(--action-secondary);
+  transition: background 120ms ease;
+}
+
+.rv__info:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.rv__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Action buttons */
+.ab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--surface-secondary);
+  transition: background 100ms ease, opacity 100ms ease;
+}
+
+.ab:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.ab:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ab--primary,
+.ab--primary .ab__label,
+.ab--primary .ab__icon {
+  color: #ffffff;
+}
+
+.ab--primary {
+  background: var(--action-primary);
+  border-color: transparent;
+}
+
+.ab--primary:hover:not(:disabled) {
+  background: #4a5ec2;
+}
+
+.ab__icon {
+  display: inline-flex;
+  color: currentColor;
+}
+
+.ab__label {
+  line-height: 1;
+}
+
+/* Toolbar */
+.rv__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.rv__toolbar-spacer {
+  flex: 1;
+  min-width: 8px;
+}
+
+.rb {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  background: transparent;
+  transition: background 100ms ease;
+}
+
+.rb:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.rb__icon {
+  display: inline-flex;
+  color: var(--text-primary);
+}
+
+.rb__trailing {
+  display: inline-flex;
+  color: var(--action-secondary);
+}
+
+.rb--icon {
+  width: 32px;
+  padding: 0;
+  justify-content: center;
+  color: var(--action-secondary);
+}
+
+/* Chart wrap */
+.rv__chart-wrap {
+  padding: 8px 0;
+  min-width: 0;
+}
+
+/* Tabs */
+.rv__tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 1px solid var(--surface-secondary);
+  margin-top: 8px;
+}
+
+.rv__tab {
+  position: relative;
+  padding: 10px 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  text-transform: none;
+  transition: color 100ms ease;
+}
+
+.rv__tab:hover {
+  color: var(--text-primary);
+}
+
+.rv__tab.is-active {
+  color: var(--action-primary);
+}
+
+.rv__tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: -1px;
+  height: 2px;
+  background: var(--action-primary);
+  border-radius: 2px 2px 0 0;
+}

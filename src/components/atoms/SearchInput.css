@@ -1,0 +1,31 @@
+.search {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 8px;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-button);
+}
+
+.search__icon {
+  width: 14px;
+  height: 14px;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.search__input {
+  flex: 1 0 0;
+  min-width: 0;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: var(--text-caption);
+  color: var(--color-text-primary);
+}
+
+.search__input::placeholder {
+  color: var(--color-text-secondary);
+}

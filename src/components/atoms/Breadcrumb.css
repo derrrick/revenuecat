@@ -1,0 +1,40 @@
+.breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-body);
+  line-height: 20px;
+  color: var(--color-text-secondary);
+}
+
+.breadcrumb__group {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breadcrumb__link {
+  color: var(--color-text-secondary);
+  font-weight: var(--weight-medium);
+  transition: color 100ms ease;
+}
+
+.breadcrumb__link:hover {
+  color: var(--color-text-primary);
+}
+
+.breadcrumb__crumb {
+  color: var(--color-text-primary);
+  font-weight: var(--weight-semibold);
+}
+
+.breadcrumb__crumb.is-active {
+  color: var(--color-text-primary);
+}
+
+.breadcrumb__sep {
+  color: var(--color-text-muted);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-body);
+  line-height: 16px;
+}

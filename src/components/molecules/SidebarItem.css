@@ -1,0 +1,49 @@
+/* Matches demo: .css-12eakey
+   - 40px tall, display flex, gap 12, padding 10 12
+   - base color: #09090D, icon: #767676
+   - active: bg white + card shadow
+*/
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 40px;
+  padding: 10px 12px;
+  border-radius: var(--radius-xl);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--text-primary);
+  font-weight: 400;
+  transition: background 120ms ease, box-shadow 120ms ease;
+}
+
+.sidebar-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.sidebar-item.is-active,
+.sidebar-item.active {
+  background: var(--surface-primary);
+  box-shadow: var(--rc-card-shadow);
+  font-weight: 600;
+}
+
+.sidebar-item__icon {
+  width: 16px;
+  height: 16px;
+  color: #767676;
+  flex-shrink: 0;
+}
+
+.sidebar-item.is-active .sidebar-item__icon {
+  color: var(--text-primary);
+}
+
+.sidebar-item__label {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

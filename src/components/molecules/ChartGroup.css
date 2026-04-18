@@ -1,0 +1,47 @@
+.chart-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-group__header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 8px;
+  font-size: var(--text-small);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-md);
+  transition: background 120ms ease;
+  width: 100%;
+  text-align: left;
+}
+
+.chart-group__header:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.chart-group__chevron {
+  display: inline-flex;
+  width: 12px;
+  height: 12px;
+  color: var(--color-text-muted);
+  transform: rotate(-90deg);
+  transition: transform 150ms ease;
+}
+
+.chart-group__chevron svg {
+  width: 12px;
+  height: 12px;
+}
+
+.chart-group.is-open .chart-group__chevron {
+  transform: rotate(0);
+}
+
+.chart-group__items {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2px;
+}

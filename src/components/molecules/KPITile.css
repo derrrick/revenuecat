@@ -1,0 +1,131 @@
+/*
+  Measured from demo:
+    tile: 374 × 202, border 1px solid #E0E0E0, radius 10px, NO shadow
+    inner wrapper: 372 × 200
+    header section:   pad 16 16 0 16  →  title (20 tall) + icon
+    mid section:      pad 0 16 0 16   →  value (48 tall) + sublabel (20 tall, 4px gap from value)
+    spark section:    edge-to-edge, 60 tall
+    gap between sections: 16px (vertical)
+*/
+
+.kpi {
+  display: flex;
+  flex-direction: column;
+  height: 202px;
+  background: var(--surface-primary);
+  border: 2px solid var(--surface-secondary);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  transform-origin: center;
+  transition: scale 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+}
+
+a.kpi {
+  cursor: pointer;
+}
+
+a.kpi:hover {
+  scale: 1.01;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.05);
+}
+
+.kpi__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+}
+
+.kpi__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 0 16px;
+  height: 36px;
+}
+
+.kpi__title {
+  /* MUI h4: bold 14/20 ObjectSans — but visually demo looks lighter, use 600 */
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.005em;
+  color: var(--color-text-tile-title);
+}
+
+.kpi__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: #767676;  /* --text-secondary per Figma spec */
+  flex-shrink: 0;
+}
+
+.kpi__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+
+.kpi__mid {
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kpi__value {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold); /* 600 — between demo's 700 and user's "too bold" perception */
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -0.025em;
+  color: var(--color-text-primary);
+}
+
+.kpi__sub {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 20px;
+}
+
+.kpi__sub-text {
+  /* MUI subtitle2: 500 14/1.57 Inter */
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--color-text-primary);
+}
+
+.kpi__info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+}
+
+.kpi__info-svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.kpi__spark {
+  width: 100%;
+  height: 60px;
+  line-height: 0;
+  margin-top: auto;
+}
+
+.kpi__spark svg {
+  display: block;
+}

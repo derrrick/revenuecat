@@ -1,0 +1,74 @@
+/*
+  Matches demo's nav: flex column, gap 8px, padding 4px.
+  Items are direct children. The first element of the footer group
+  (Apps & providers) uses margin-top: auto, which pushes it + everything
+  after it to the bottom of the nav. When the viewport shrinks, items
+  naturally stack and the nav scrolls if needed.
+*/
+
+.sidebar {
+  width: var(--layout-sidebar-w);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px;
+  background: var(--surface-root);
+  flex-shrink: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Auto-hide scrollbar — shows only on hover */
+.sidebar {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 200ms ease;
+}
+
+.sidebar:hover,
+.sidebar:focus-within {
+  scrollbar-color: var(--surface-secondary) transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 3px;
+  transition: background 200ms ease;
+}
+
+.sidebar:hover::-webkit-scrollbar-thumb,
+.sidebar:focus-within::-webkit-scrollbar-thumb {
+  background: var(--surface-secondary);
+}
+
+/* Marker class: pins this element + siblings below it to the bottom */
+.sidebar__pin-start {
+  margin-top: auto;
+}
+
+.sidebar__collapse {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  border-radius: var(--radius-xl);
+  color: var(--text-secondary);
+  transition: background 120ms ease;
+  flex-shrink: 0;
+}
+
+.sidebar__collapse:hover {
+  background: rgba(0, 0, 0, 0.04);
+}

@@ -1,0 +1,68 @@
+/*
+  Measured layout inside white Paper (32px pad):
+    Content area: 1160 wide
+    Title row:    y=152..184 (h=32)
+    KPI grid:     y=216..640 (h=424) → 32px gap below title
+    RT title:     y=672..704 (h=32)  → 32px gap below grid
+    RT table:     y=704+
+*/
+.ov {
+  display: flex;
+  flex-direction: column;
+  gap: 33px;
+  padding: 32px;
+  flex: 1;
+  overflow: auto;
+}
+
+.ov__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 32px;
+}
+
+.ov__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.ov__sandbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ov__sandbox-label {
+  font-size: var(--text-body);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-primary);
+}
+
+.ov__kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--layout-grid-gap);
+}
+
+.ov__rt {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ov__rt-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  align-self: flex-start;
+}

@@ -1,0 +1,29 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-bold);
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pill--renewal {
+  background: var(--color-pill-renewal-bg);
+  color: var(--color-pill-renewal-text);
+}
+
+.pill--newsub {
+  background: var(--color-pill-newsub-bg);
+  color: var(--color-pill-newsub-text);
+}
+
+.pill--trial {
+  background: var(--color-pill-trial-bg);
+  color: var(--color-pill-trial-text);
+}

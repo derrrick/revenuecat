@@ -1,0 +1,280 @@
+/*
+  ChartList sidebar — matches demo's left rail inside the Paper card:
+    width 20.5rem (328px), scrollable, with colored icon tiles per group.
+*/
+
+.cl {
+  width: 20.5rem;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-primary);
+  border-right: 1px solid var(--surface-secondary);
+  overflow: hidden;
+  height: 100%;
+  min-height: 0;
+}
+
+.cl__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding: 0 12px 0 20px;
+  flex-shrink: 0;
+}
+
+.cl__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.cl__collapse {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: var(--text-secondary);
+  transition: background 120ms ease;
+}
+
+.cl__collapse:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.cl__body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 12px 16px;
+}
+
+/* Auto-hide scrollbar — transparent thumb until hovered/scrolling */
+.cl__body {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 200ms ease;
+}
+
+.cl__body:hover,
+.cl__body:focus-within {
+  scrollbar-color: var(--surface-secondary) transparent;
+}
+
+.cl__body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cl__body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cl__body::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 3px;
+  transition: background 200ms ease;
+}
+
+.cl__body:hover::-webkit-scrollbar-thumb,
+.cl__body:focus-within::-webkit-scrollbar-thumb {
+  background: var(--surface-secondary);
+}
+
+.cl__search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  min-height: 40px;
+  flex-shrink: 0;
+  border: 1px solid var(--surface-secondary);
+  border-radius: 10px;
+  padding: 0 14px;
+  gap: 8px;
+  background: var(--surface-primary);
+  margin-bottom: 4px;
+  box-sizing: border-box;
+}
+
+.cl__search-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: var(--action-secondary);
+  flex-shrink: 0;
+}
+
+.cl__search-icon svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.cl__search-input {
+  height: 38px;
+  line-height: 38px;
+  font-size: 0.875rem;
+}
+
+.cl__search-icon {
+  color: var(--action-secondary);
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.cl__search-input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  flex: 1;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  min-width: 0;
+}
+
+.cl__search-input::placeholder {
+  color: var(--action-secondary);
+}
+
+/* Group */
+.cl-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.cl-group__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--text-primary);
+  border-radius: 8px;
+  text-align: left;
+  transition: background 120ms ease;
+}
+
+.cl-group__header:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.cl-group__caret {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: var(--action-secondary);
+  transform: rotate(180deg); /* arrow-up flipped = pointing down (closed) */
+  transition: transform 150ms ease;
+}
+
+.cl-group.is-open .cl-group__caret {
+  transform: rotate(0); /* arrow-up pointing up = open */
+}
+
+.cl-group__label {
+  flex: 1;
+}
+
+.cl-group__list {
+  list-style: none;
+  margin: 0;
+  padding: 2px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Item */
+.cl-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 36px;
+  padding: 0 8px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: background 120ms ease;
+}
+
+.cl-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.cl-item.is-active {
+  background: var(--rc-blue-tertiary);
+}
+
+.cl-item.is-active .cl-item__label {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.cl-item__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  color: var(--text-contrast);
+  flex-shrink: 0;
+}
+
+.cl-item__icon svg {
+  width: 12px;
+  height: 12px;
+}
+
+.cl-item__icon--violet {
+  background: var(--rc-violet-primary);
+}
+
+.cl-item__icon--green {
+  background: var(--rc-green-primary);
+}
+
+.cl-item__icon--blue {
+  background: var(--rc-blue-primary);
+}
+
+.cl-item__icon--teal {
+  background: var(--rc-teal-primary);
+}
+
+.cl-item__icon--orange {
+  background: var(--rc-orange-primary);
+}
+
+.cl-item__icon--red {
+  background: var(--rc-red-primary);
+}
+
+.cl-item__label {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.cl-item__label > span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

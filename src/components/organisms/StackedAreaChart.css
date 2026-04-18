@@ -1,0 +1,44 @@
+.sac {
+  position: relative;
+  width: 100%;
+  min-height: 500px;
+}
+
+.sac__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.sac__tick {
+  font-size: 12px;
+  font-weight: 500;
+  fill: var(--text-secondary);
+  font-family: var(--font-sans);
+}
+
+.sac__overlay {
+  position: absolute;
+  top: 16px;
+  left: 48px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sac__overlay-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  color: var(--action-secondary);
+  background: transparent;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.sac__overlay-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text-primary);
+}

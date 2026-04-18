@@ -1,0 +1,19 @@
+.area-chart {
+  width: 100%;
+}
+
+.area-chart__svg {
+  display: block;
+  width: 100%;
+}
+
+.area-chart__y-label {
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  fill: var(--color-text-muted);
+}
+
+.area-chart__x-label {
+  font-size: var(--text-caption);
+  fill: var(--color-text-secondary);
+}

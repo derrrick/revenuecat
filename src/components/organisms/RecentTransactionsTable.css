@@ -1,0 +1,231 @@
+/*
+  Matches demo structure:
+    - outer Paper card (elevation 1, shadow, radius 10, overflow hidden)
+    - inner grid with role="table" and role="row"/"cell" divs
+    - column widths approximate demo's MUI grid
+    - row hover reveals copy button
+    - dates use abbr with dotted underline
+    - Revenue right-aligned
+    - Pills body2 typography (400 12/16)
+*/
+
+.rt-card {
+  background: var(--surface-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--rc-card-shadow);
+  overflow: hidden;
+}
+
+.rt {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.rt__row {
+  display: grid;
+  grid-template-columns:
+    minmax(180px, 1.3fr)
+    minmax(100px, 0.9fr)
+    minmax(200px, 1.6fr)
+    minmax(110px, 1fr)
+    minmax(110px, 1fr)
+    minmax(90px, 0.8fr)
+    minmax(100px, 0.9fr);
+  align-items: center;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--surface-secondary);
+}
+
+.rt__row--head {
+  height: 40px;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  background: rgb(246, 246, 246);
+}
+
+.rt__row:not(.rt__row--head) {
+  height: 44px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--text-primary);
+  font-weight: 400;
+}
+
+.rt__row:last-child {
+  border-bottom: none;
+}
+
+.rt__cell {
+  padding: 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.rt__head-stack {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rt__eye-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  color: var(--text-muted);
+  transition: background 100ms ease, color 100ms ease;
+}
+
+.rt__eye-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text-primary);
+}
+
+/* Customer ID cell = flag + truncated ID link + spacer + copy button */
+.rt__cell--id {
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+  min-width: 0;
+}
+
+.rt__flag {
+  height: 0.8rem;
+  width: 1rem;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+  border-radius: 1px;
+  object-fit: cover;
+}
+
+.rt__id-wrap {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.rt__id-link {
+  color: var(--action-primary);
+  font-weight: 500;
+  transition: opacity 100ms ease;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.rt__id-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.rt__id-truncate,
+.rt__mono-truncate {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rt__mono-truncate {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+}
+
+.rt__spacer {
+  flex: 1;
+}
+
+.rt__copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  color: var(--action-secondary);
+  transition: background 100ms ease, opacity 100ms ease;
+  opacity: 0;
+  flex-shrink: 0;
+}
+
+.rt__row:hover .rt__copy-btn {
+  opacity: 1;
+}
+
+.rt__copy-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text-primary);
+}
+
+/* Dates use <abbr> with dotted underline */
+.rt__abbr {
+  text-decoration: underline dotted rgb(from var(--text-secondary) r g b / 0.5);
+  text-underline-offset: 2px;
+  color: var(--text-primary);
+}
+
+/* Revenue column right-aligned */
+.rt__cell--revenue {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.rt__head-revenue {
+  width: 100%;
+  text-align: right;
+  display: block;
+}
+
+.rt__revenue-dash {
+  color: var(--text-secondary);
+}
+
+/* Pills — body2 typography inside a shaped box (css-fnvarp/1stw887/fmroq8) */
+.rt-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+}
+
+.rt-pill__text {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1rem;
+}
+
+.rt-pill--renewal {
+  background: var(--rc-green-tertiary);
+}
+
+.rt-pill--renewal .rt-pill__text {
+  color: var(--success-text);
+}
+
+.rt-pill--newsub {
+  background: var(--rc-blue-tertiary);
+}
+
+.rt-pill--newsub .rt-pill__text {
+  color: var(--rc-blue-primary);
+}
+
+.rt-pill--trial {
+  background: var(--rc-yellow-tertiary);
+}
+
+.rt-pill--trial .rt-pill__text {
+  color: var(--warning-text);
+}
+
+.rt__row:hover {
+  background: rgba(0, 0, 0, 0.015);
+}

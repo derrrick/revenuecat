@@ -1,0 +1,47 @@
+/*
+  Layout:
+    - shell spans the full viewport
+    - alert banner + header at the top
+    - below: sidebar + main (flex row)
+    - main has padding 4px (per demo's `main { padding: 4px }`) wrapping a
+      Paper card. Each page then controls its own internal padding.
+*/
+
+.shell {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-root);
+  overflow: hidden;
+}
+
+.shell__row {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  min-height: 0;
+  padding: 0 4px 4px 4px;
+}
+
+.shell__main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  overflow: auto;
+}
+
+/* White Paper card — no internal padding; the page content inside decides
+   whether to pad (Overview does; Revenue uses 2-pane flush layout). */
+.shell__paper {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--rc-card-shadow);
+  overflow: hidden;
+}

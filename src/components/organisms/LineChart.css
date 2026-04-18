@@ -1,0 +1,29 @@
+.line-chart {
+  position: relative;
+  margin-top: 16px;
+}
+
+.line-chart__svg {
+  display: block;
+}
+
+.line-chart__y-label {
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  fill: var(--color-text-secondary);
+}
+
+.line-chart__x-axis {
+  position: relative;
+  height: 16px;
+  margin-top: 16px;
+}
+
+.line-chart__x-label {
+  position: absolute;
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+  line-height: 16px;
+  white-space: nowrap;
+}
