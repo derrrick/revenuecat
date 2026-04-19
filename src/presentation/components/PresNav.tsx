@@ -40,7 +40,7 @@ export function PresNav() {
         <a href="#problem" className="pres-nav__link-secondary">Problem</a>
         <a href="#process" className="pres-nav__link-secondary">Process</a>
         <a href="#solution" className="pres-nav__link-secondary">Solution</a>
-        <a href="/overview" className="pres-nav__link-primary">Live prototype ↗</a>
+        <a href="/overview?picker=open" className="pres-nav__link-primary">Live prototype ↗</a>
       </div>
       <div className="pres-nav__meta">
         <span>For RevenueCat · 2026</span>

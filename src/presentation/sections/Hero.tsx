@@ -4,7 +4,7 @@ export function Hero() {
   return (
     <section className="hero">
       <div className="hero__kicker mono">
-        <span>Product Design Exercise · 2026</span>
+        <span><strong className="hero__kicker-name">Derrick Schippert</strong> · Product Design Exercise · 2026</span>
       </div>
 
       <h1 className="hero__title">

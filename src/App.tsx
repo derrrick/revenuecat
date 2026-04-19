@@ -7,7 +7,28 @@ import { ContextBlade } from "./components/organisms/ContextBlade";
 import { VersionProvider } from "./version/VersionContext";
 import { VersionPicker, VersionHint } from "./version/VersionPicker";
 import { useVersionHotkey } from "./version/useVersionHotkey";
+import { useVersion } from "./version/useVersion";
 import { Presentation } from "./presentation/Presentation";
+
+/** Opens the VersionPicker on arrival when the URL carries ?picker=open,
+ *  then strips the param so a refresh doesn't keep forcing it open. */
+function PickerAutoOpen() {
+  const { openPicker } = useVersion();
+  const { pathname, search } = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(search);
+    if (params.get("picker") === "open") {
+      openPicker();
+      params.delete("picker");
+      const nextSearch = params.toString();
+      const nextUrl = pathname + (nextSearch ? `?${nextSearch}` : "");
+      window.history.replaceState(null, "", nextUrl);
+    }
+  }, [search, pathname, openPicker]);
+
+  return null;
+}
 
 function AppRoutes() {
   useVersionHotkey();
@@ -56,6 +77,7 @@ function AppRoutes() {
       </Routes>
       {!isPresentation && (
         <>
+          <PickerAutoOpen />
           <VersionPicker />
           <VersionHint />
           <ContextBlade open={bladeOpen} onClose={closeBlade} />

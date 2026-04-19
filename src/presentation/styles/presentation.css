@@ -103,17 +103,14 @@ html[data-route="presentation"] body {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: 18px var(--edge);
+  padding: 22px var(--edge);
   color: #FFFFFF;
   pointer-events: none;
   border-bottom: 1px solid transparent;
   background-color: transparent;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  transition: background-color 220ms ease, backdrop-filter 220ms ease, -webkit-backdrop-filter 220ms ease, color 220ms ease, border-color 220ms ease;
-}
-.pres-nav:not(.is-scrolled) {
-  mix-blend-mode: difference;
+  transition: background-color 220ms ease, backdrop-filter 220ms ease, -webkit-backdrop-filter 220ms ease, color 220ms ease, border-color 220ms ease, padding 220ms ease;
 }
 .pres-nav > * { pointer-events: auto; }
 .pres-nav a { color: inherit; }
@@ -123,16 +120,40 @@ html[data-route="presentation"] body {
   -webkit-backdrop-filter: saturate(180%) blur(16px);
   color: var(--ink-strong);
   border-bottom-color: var(--rule);
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.pres-nav .pres-nav__link-primary {
+  padding: 9px 16px;
+  background: transparent;
+  color: #FFFFFF;
+  border: 1.5px solid var(--rc-blue);
+  border-radius: 999px;
+  margin-left: 12px;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+.pres-nav .pres-nav__link-primary:hover {
+  background: var(--rc-blue);
+}
+.pres-nav.is-scrolled .pres-nav__link-primary {
+  background: var(--rc-blue);
+  color: #FFFFFF;
+  border-color: var(--rc-blue);
+}
+.pres-nav.is-scrolled .pres-nav__link-primary:hover {
+  background: #4252B5;
+  border-color: #4252B5;
 }
 .pres-nav__brand {
   font-family: var(--pres-font-mono);
   font-size: var(--text-micro);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 700;
 }
 .pres-nav__links {
   display: flex;
+  align-items: center;
   gap: 28px;
   justify-self: center;
   font-family: var(--pres-font-mono);

@@ -6,7 +6,7 @@ export function Footer() {
       <div className="pres-footer__body edge">
         <span className="mono pres-footer__eyebrow">08 / Try it</span>
 
-        <a className="pres-footer__cta" href="/overview" aria-label="Open the live prototype">
+        <a className="pres-footer__cta" href="/overview?picker=open" aria-label="Open the live prototype">
           <span className="pres-footer__cta-label">Explore the live prototype</span>
           <span className="pres-footer__cta-arrow" aria-hidden>→</span>
         </a>
