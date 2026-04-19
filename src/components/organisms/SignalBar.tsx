@@ -105,6 +105,21 @@ export function SignalBar({ emptyMode, forceMode }: Props) {
             <span>View signal history</span>
             <span className="sb__cta-arrow" aria-hidden>→</span>
           </button>
+          <button
+            className="sb__dismiss"
+            onClick={dismiss}
+            aria-label="Dismiss"
+            type="button"
+          >
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path
+                d="M2.5 2.5L9.5 9.5M9.5 2.5L2.5 9.5"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
         </div>
       </section>
     );
