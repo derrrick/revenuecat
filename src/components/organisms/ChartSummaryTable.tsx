@@ -1,14 +1,14 @@
-import {
-  REVENUE_DATES,
-  REVENUE_SERIES,
-  REVENUE_AVG,
-  TX_SERIES,
-  TX_AVG,
-} from "../../data/revenue";
+import type { ChartConfig } from "../../data/chartMeta";
 import { CatIcon } from "../../icons/CatIcon";
 import "./ChartSummaryTable.css";
 
-export function ChartSummaryTable() {
+type Props = {
+  config: ChartConfig;
+};
+
+export function ChartSummaryTable({ config }: Props) {
+  const { dates, series } = config;
+
   return (
     <div className="cst">
       <div className="cst__toolbar">
@@ -28,7 +28,6 @@ export function ChartSummaryTable() {
       </div>
 
       <div className="cst__grid">
-        {/* Left frozen column — series labels */}
         <table className="cst__labels">
           <thead>
             <tr>
@@ -38,31 +37,31 @@ export function ChartSummaryTable() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <div className="cst__series">
-                  <span className="cst__swatch" style={{ background: "var(--rc-green-primary)" }} />
-                  <span className="cst__series-label">Revenue</span>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div className="cst__series">
-                  <span className="cst__swatch cst__swatch--empty" />
-                  <span className="cst__series-label">Transactions</span>
-                </div>
-              </td>
-            </tr>
+            {series.map((s) => (
+              <tr key={s.label}>
+                <td>
+                  <div className="cst__series">
+                    {s.color === "transparent" ? (
+                      <span className="cst__swatch cst__swatch--empty" />
+                    ) : (
+                      <span
+                        className="cst__swatch"
+                        style={{ background: s.color }}
+                      />
+                    )}
+                    <span className="cst__series-label">{s.label}</span>
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
 
-        {/* Right scrollable columns — dates + Row Average */}
         <div className="cst__scroll">
           <table className="cst__data">
             <thead>
               <tr>
-                {REVENUE_DATES.map((d) => (
+                {dates.map((d) => (
                   <th key={d}>{d}</th>
                 ))}
                 <th className="cst__avg-head">
@@ -72,26 +71,27 @@ export function ChartSummaryTable() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                {REVENUE_SERIES.map((v, i) => (
-                  <td key={i} className={v === "$0" ? "cst__cell cst__cell--zero" : "cst__cell"}>
-                    {v}
-                  </td>
-                ))}
-                <td className="cst__cell">{REVENUE_AVG}</td>
-              </tr>
-              <tr>
-                {TX_SERIES.map((v, i) => (
-                  <td key={i} className={v === "0" ? "cst__cell cst__cell--zero" : "cst__cell"}>
-                    {v}
-                  </td>
-                ))}
-                <td className="cst__cell">{TX_AVG}</td>
-              </tr>
+              {series.map((s) => (
+                <tr key={s.label}>
+                  {s.values.map((v, i) => (
+                    <td
+                      key={i}
+                      className={isZero(v) ? "cst__cell cst__cell--zero" : "cst__cell"}
+                    >
+                      {v}
+                    </td>
+                  ))}
+                  <td className="cst__cell">{s.average}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
       </div>
     </div>
   );
+}
+
+function isZero(v: string): boolean {
+  return v === "0" || v === "$0";
 }

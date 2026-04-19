@@ -1,0 +1,10 @@
+/* Shared glue between the three overview variants. Keeps the Overview
+   baseline spacing consistent whether or not an extra surface (Signal Bar,
+   Forecast module, Insights panel) is inserted. */
+
+.variant-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--layout-grid-gap);
+  flex-shrink: 0;
+}

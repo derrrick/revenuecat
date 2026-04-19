@@ -1,0 +1,190 @@
+.fc {
+  background: var(--surface-primary);
+  border: 1px solid var(--surface-secondary);
+  border-radius: var(--radius-xl);
+  padding: 22px 24px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.fc__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.fc__head-left { display: flex; flex-direction: column; gap: 4px; }
+
+.fc__eyebrow {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rc-blue-primary);
+}
+
+.fc__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: -0.015em;
+  line-height: 24px;
+  color: var(--text-primary);
+}
+
+.fc__head-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.fc__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.fc__swatch {
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.fc__swatch--actual     { background: var(--rc-blue-primary); }
+.fc__swatch--projected {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--rc-blue-primary) 0 3px,
+    transparent 3px 6px
+  );
+}
+.fc__swatch--band       { background: var(--rc-blue-secondary); }
+
+.fc__body {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.fc__chart {
+  background: var(--surface-primary);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.fc__tick {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  fill: var(--text-muted);
+}
+
+.fc__today-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  fill: var(--text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.fc__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-left: 22px;
+  border-left: 1px solid var(--color-divider);
+}
+
+.fc__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fc__stat-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.fc__stat-value {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 32px;
+}
+
+.fc__stat-sub {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.fc__stat-sub-positive { color: var(--success-text); font-weight: 600; }
+
+/* Churn meter */
+
+.fc__meter {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  text-transform: capitalize;
+  color: var(--text-secondary);
+}
+
+.fc__meter-seg {
+  width: 10px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--surface-secondary);
+}
+
+.fc__meter-seg.is-on.fc__meter-seg--low    { background: var(--rc-green-primary); }
+.fc__meter-seg.is-on.fc__meter-seg--medium { background: var(--rc-orange-primary); }
+.fc__meter-seg.is-on.fc__meter-seg--high   { background: var(--rc-red-primary); }
+
+.fc__meter-text { margin-left: 4px; color: var(--text-secondary); }
+
+/* Confidence bar */
+
+.fc__confidence {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  min-width: 120px;
+}
+
+.fc__confidence-track {
+  flex: 1;
+  height: 4px;
+  background: var(--surface-root);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.fc__confidence-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--rc-blue-secondary), var(--rc-blue-primary));
+  border-radius: 999px;
+}

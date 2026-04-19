@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { DeltaBadge } from "./DeltaBadge";
+import type { Delta } from "../../data/signals";
 import "./KPITile.css";
 
 type SparkType = "trial" | "growth" | "steady" | "volatile" | "flat-blue" | "flat-green";
@@ -11,56 +13,75 @@ type Props = {
   icon: ReactNode;
   sparkline: SparkType;
   to?: string;
+  delta?: Delta;
+  skeleton?: boolean;
 };
 
-export function KPITile({ title, value, sublabel, icon, sparkline, to }: Props) {
+export function KPITile({ title, value, sublabel, icon, sparkline, to, delta, skeleton }: Props) {
   const inner = (
     <div className="kpi__stack">
       <div className="kpi__head">
         <h2 className="kpi__title">{title}</h2>
-        <span className="kpi__icon">{icon}</span>
+        <div className="kpi__head-right">
+          {delta && !skeleton && <DeltaBadge delta={delta} />}
+          <span className="kpi__icon">{icon}</span>
+        </div>
       </div>
       <div className="kpi__mid">
-        <h1 className="kpi__value">{value}</h1>
+        {skeleton ? (
+          <span className="kpi__skeleton kpi__skeleton--value" aria-hidden />
+        ) : (
+          <h1 className="kpi__value">{value}</h1>
+        )}
         <div className="kpi__sub">
-          <p className="kpi__sub-text">{sublabel}</p>
-          <div className="kpi__info" data-testid="last-updated-icon">
-            <svg
-              className="kpi__info-svg"
-              focusable="false"
-              aria-label="Updated just now"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <use
-                className="base"
-                href="/icons/timelapse.svg#base"
-                fill="var(--text-secondary)"
-              />
-              <use
-                className="details"
-                href="/icons/timelapse.svg#details"
-                fill="var(--text-secondary)"
-              />
-            </svg>
-          </div>
+          {skeleton ? (
+            <span className="kpi__skeleton kpi__skeleton--sub" aria-hidden />
+          ) : (
+            <>
+              <p className="kpi__sub-text">{sublabel}</p>
+              <div className="kpi__info" data-testid="last-updated-icon">
+                <svg
+                  className="kpi__info-svg"
+                  focusable="false"
+                  aria-label="Updated just now"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <use
+                    className="base"
+                    href="/icons/timelapse.svg#base"
+                    fill="var(--text-secondary)"
+                  />
+                  <use
+                    className="details"
+                    href="/icons/timelapse.svg#details"
+                    fill="var(--text-secondary)"
+                  />
+                </svg>
+              </div>
+            </>
+          )}
         </div>
       </div>
       <div className="kpi__spark">
-        <Sparkline type={sparkline} />
+        {skeleton ? (
+          <span className="kpi__skeleton kpi__skeleton--spark" aria-hidden />
+        ) : (
+          <Sparkline type={sparkline} />
+        )}
       </div>
     </div>
   );
 
-  if (to) {
+  if (to && !skeleton) {
     return (
       <Link to={to} className={`kpi kpi--${sparkline}`}>
         {inner}
       </Link>
     );
   }
-  return <div className={`kpi kpi--${sparkline}`}>{inner}</div>;
+  return <div className={`kpi kpi--${sparkline} ${skeleton ? "is-skeleton" : ""}`}>{inner}</div>;
 }
 
 const PATHS: Record<SparkType, { line: string; color: string }> = {

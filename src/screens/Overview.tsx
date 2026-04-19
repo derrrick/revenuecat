@@ -1,31 +1,48 @@
 import { useState } from "react";
-import { KPITile } from "../components/molecules/KPITile";
 import { Toggle } from "../components/atoms/Toggle";
 import { RecentTransactionsTable } from "../components/organisms/RecentTransactionsTable";
-import { CatIcon } from "../icons/CatIcon";
+import { useVersion } from "../version/useVersion";
+import { VARIANT_COPY } from "../data/signals";
+import { OverviewVariantA } from "./variants/OverviewVariantA";
+import { OverviewVariantB } from "./variants/OverviewVariantB";
+import { OverviewVariantC } from "./variants/OverviewVariantC";
+import { OverviewVariantBaseline } from "./variants/OverviewVariantBaseline";
 import "./Overview.css";
 
 export function Overview() {
   const [sandbox, setSandbox] = useState(false);
+  const { version, openPicker } = useVersion();
+
+  const variantCopy = VARIANT_COPY[version];
 
   return (
     <div className="ov">
       <header className="ov__header">
-        <h2 className="ov__title">Overview</h2>
+        <div className="ov__title-group">
+          <h2 className="ov__title">Overview</h2>
+          <button
+            type="button"
+            className="ov__variant-chip"
+            onClick={openPicker}
+            title="Switch prototype version (⌘V)"
+          >
+            <span className={`ov__variant-chip-dot ov__variant-chip-dot--${version}`} />
+            <span className="ov__variant-chip-label">
+              {variantCopy.title} <span>· {variantCopy.tagline}</span>
+            </span>
+            <span className="ov__variant-chip-kbd">⌘V</span>
+          </button>
+        </div>
         <label className="ov__sandbox">
           <Toggle on={sandbox} onChange={setSandbox} size="sm" />
           <span className="ov__sandbox-label">Sandbox data</span>
         </label>
       </header>
 
-      <section className="ov__kpis">
-        <KPITile title="Active Trials" value="43" sublabel="In total" icon={<CatIcon name="hourglass" />} sparkline="trial" to="/charts/trials" />
-        <KPITile title="Active Subscriptions" value="3,071" sublabel="In total" icon={<CatIcon name="calendar" />} sparkline="growth" to="/charts/actives" />
-        <KPITile title="MRR" value="$29,124" sublabel="Monthly Recurring Revenue" icon={<CatIcon name="autorenew" />} sparkline="steady" to="/charts/mrr" />
-        <KPITile title="Revenue" value="$36,359" sublabel="Last 28 days" icon={<CatIcon name="currency-usd" />} sparkline="volatile" to="/charts/revenue" />
-        <KPITile title="New Customers" value="7,400" sublabel="Last 28 days" icon={<CatIcon name="person" />} sparkline="flat-green" to="/charts/customers_new" />
-        <KPITile title="Active Customers" value="18,407" sublabel="Last 28 days" icon={<CatIcon name="person" />} sparkline="flat-blue" />
-      </section>
+      {version === "Baseline" && <OverviewVariantBaseline />}
+      {version === "A" && <OverviewVariantA />}
+      {version === "B" && <OverviewVariantB />}
+      {version === "C" && <OverviewVariantC />}
 
       <section className="ov__rt">
         <h2 className="ov__rt-title">Recent transactions</h2>

@@ -45,6 +45,63 @@
   color: var(--color-text-primary);
 }
 
+.ov__title-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ov__variant-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px 4px 8px;
+  background: var(--surface-primary);
+  border: 1px solid var(--surface-secondary);
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: border-color 140ms ease, color 140ms ease;
+}
+
+.ov__variant-chip:hover {
+  border-color: #B7C0E7;
+  color: var(--text-primary);
+}
+
+.ov__variant-chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--text-muted);
+}
+
+.ov__variant-chip-dot--Baseline { background: var(--text-muted); }
+.ov__variant-chip-dot--A { background: var(--rc-orange-primary); }
+.ov__variant-chip-dot--B { background: var(--rc-blue-primary); }
+.ov__variant-chip-dot--C { background: var(--rc-green-primary); }
+
+.ov__variant-chip-label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ov__variant-chip-label span {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.ov__variant-chip-kbd {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--surface-root);
+  color: var(--text-secondary);
+}
+
 .ov__kpis {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -1,9 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ChartListSidebar } from "../components/organisms/ChartListSidebar";
-import { StackedAreaChart } from "../components/organisms/StackedAreaChart";
+import { TrendChart } from "../components/organisms/TrendChart";
 import { ChartSummaryTable } from "../components/organisms/ChartSummaryTable";
+import { SignalBreadcrumb } from "../components/organisms/SignalBreadcrumb";
+import { TrialSuggestions } from "../components/organisms/TrialSuggestions";
 import { CatIcon } from "../icons/CatIcon";
+import { useVersion } from "../version/useVersion";
+import { getChartConfig } from "../data/chartMeta";
 import "./Revenue.css";
 
 type ChartBtnProps = {
@@ -53,6 +57,21 @@ function ActionButton({
 
 export function Revenue() {
   const [tab, setTab] = useState<"summary" | "annotations">("summary");
+  const { version } = useVersion();
+  const { chart: chartSlug } = useParams();
+  const config = getChartConfig(chartSlug);
+
+  // Toolbar metric icon varies by chart — currency for revenue-family
+  // metrics, hourglass for trials, person for customer metrics.
+  const metricIcon = metricIconFor(config.slug);
+  // Chart-kind label shown in the toolbar + chart-kind icon.
+  const chartKindLabel = config.kind === "stacked-area" ? "Stacked area" : "Line";
+  const chartKindIcon = config.kind === "stacked-area" ? "chart-line-stacked" : "chart-line";
+
+  // Anomaly highlight range — only shown when arriving via Signal deep-link.
+  // Matches the trailing 7-day dip in the trials data so the "flagged"
+  // region lines up with the narrative.
+  const highlightRange = version === "C" && chartSlug === "trials" ? [20, 27] as [number, number] : null;
 
   return (
     <div className="rv">
@@ -71,16 +90,17 @@ export function Revenue() {
               </li>
               <li aria-hidden className="rv__bc-sep">/</li>
               <li>
-                <Link to="/charts/revenue" className="is-active">Revenue</Link>
+                <Link to={`/charts/${config.slug}`} className="is-active">{config.title}</Link>
               </li>
             </ol>
           </nav>
         </div>
 
         <div className="rv__body">
+          {version === "C" && <SignalBreadcrumb />}
           <div className="rv__title-row">
             <div className="rv__title-group">
-              <h2 className="rv__title">Revenue</h2>
+              <h2 className="rv__title">{config.title}</h2>
               <button className="rv__info" aria-label="info" type="button">
                 <CatIcon name="info" size={14} />
               </button>
@@ -95,11 +115,11 @@ export function Revenue() {
           <div className="rv__toolbar">
             <ChartButton icon="filter" label="Filter" />
             <ChartButton icon="chart-pie" label="Segment" />
-            <ChartButton icon="currency-usd" label="Revenue" />
+            <ChartButton icon={metricIcon} label={config.metricLabel} />
             <div className="rv__toolbar-spacer" />
             <ChartButton icon="chart-granularity" label="Daily" />
             <ChartButton icon="calendar" label="Last 28 days" />
-            <ChartButton icon="chart-line-stacked" label="Stacked area" />
+            <ChartButton icon={chartKindIcon} label={chartKindLabel} />
             <button
               className="rb rb--icon"
               type="button"
@@ -110,8 +130,10 @@ export function Revenue() {
           </div>
 
           <div className="rv__chart-wrap">
-            <StackedAreaChart />
+            <TrendChart config={config} highlightRange={highlightRange} />
           </div>
+
+          {version === "C" && chartSlug === "trials" && <TrialSuggestions />}
 
           <div className="rv__tabs" role="tablist">
             <button
@@ -132,9 +154,16 @@ export function Revenue() {
             </button>
           </div>
 
-          {tab === "summary" && <ChartSummaryTable />}
+          {tab === "summary" && <ChartSummaryTable config={config} />}
         </div>
       </section>
     </div>
   );
+}
+
+function metricIconFor(slug: string): string {
+  if (slug === "trials") return "hourglass";
+  if (slug === "customers_new" || slug.startsWith("customers")) return "person";
+  if (slug === "actives" || slug === "subscriptions") return "calendar";
+  return "currency-usd";
 }

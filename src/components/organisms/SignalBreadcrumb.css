@@ -1,0 +1,81 @@
+.sbc {
+  display: flex;
+  background: var(--surface-primary);
+  border: 1px solid var(--surface-secondary);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  animation: sbc-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  flex-shrink: 0;
+  min-height: 40px;
+}
+
+@keyframes sbc-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.sbc__accent { width: 3px; flex-shrink: 0; background: var(--text-muted); }
+
+.sbc--critical .sbc__accent { background: var(--rc-red-primary); }
+.sbc--warning  .sbc__accent { background: var(--rc-orange-primary); }
+.sbc--positive .sbc__accent { background: var(--rc-green-primary); }
+
+.sbc__inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  flex: 1;
+}
+
+.sbc__back {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 120ms ease;
+}
+
+.sbc__back:hover { background: var(--surface-root); }
+
+.sbc__sep { color: var(--text-muted); }
+
+.sbc__label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.sbc__label strong { color: var(--text-primary); font-weight: 600; }
+
+.sbc__pill {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+.sbc--critical .sbc__pill { background: var(--rc-red-tertiary); color: var(--rc-red-primary); }
+.sbc--warning  .sbc__pill { background: var(--rc-orange-tertiary); color: #B45820; }
+.sbc--positive .sbc__pill { background: var(--rc-green-tertiary); color: var(--success-text); }
+
+.sbc__spacer { flex: 1; }
+
+.sbc__close {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  font-size: 18px;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.sbc__close:hover { background: var(--surface-root); color: var(--text-primary); }
