@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { OverviewVariantBaseline } from "../../screens/variants/OverviewVariantBaseline";
 import { OverviewVariantA } from "../../screens/variants/OverviewVariantA";
 import { OverviewVariantB } from "../../screens/variants/OverviewVariantB";
