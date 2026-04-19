@@ -151,8 +151,8 @@ export function OptionCDeepDive() {
           </h3>
           <p>
             Clicking through to the chart doesn't leave the developer alone with a line graph.
-            Three contextual suggestions appear beneath the chart — the common first moves for
-            that kind of drift. Not prescriptive. A way in.
+            Three contextual suggestions appear beneath the chart, providing guidance and
+            suggesting options to mitigate the issue.
           </p>
         </div>
         <div className="deepdive__feature-preview">

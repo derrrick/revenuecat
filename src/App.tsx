@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { Overview } from "./screens/Overview";
 import { Revenue } from "./screens/Revenue";
 import { AppShell } from "./components/organisms/AppShell";
@@ -10,22 +10,27 @@ import { useVersionHotkey } from "./version/useVersionHotkey";
 import { useVersion } from "./version/useVersion";
 import { Presentation } from "./presentation/Presentation";
 
-/** Opens the VersionPicker on arrival when the URL carries ?picker=open,
- *  then strips the param so a refresh doesn't keep forcing it open. */
+/** Opens the VersionPicker only on the initial hop from the presentation
+ *  (via ?picker=open), strips the param through React Router's navigate
+ *  so the cached location matches, and guards against StrictMode + any
+ *  future remounts with a ref so it never fires twice. */
 function PickerAutoOpen() {
   const { openPicker } = useVersion();
   const { pathname, search } = useLocation();
+  const navigate = useNavigate();
+  const firedRef = useRef(false);
 
   useEffect(() => {
+    if (firedRef.current) return;
     const params = new URLSearchParams(search);
-    if (params.get("picker") === "open") {
-      openPicker();
-      params.delete("picker");
-      const nextSearch = params.toString();
-      const nextUrl = pathname + (nextSearch ? `?${nextSearch}` : "");
-      window.history.replaceState(null, "", nextUrl);
-    }
-  }, [search, pathname, openPicker]);
+    if (params.get("picker") !== "open") return;
+
+    firedRef.current = true;
+    openPicker();
+    params.delete("picker");
+    const nextSearch = params.toString();
+    navigate(pathname + (nextSearch ? `?${nextSearch}` : ""), { replace: true });
+  }, [search, pathname, openPicker, navigate]);
 
   return null;
 }
