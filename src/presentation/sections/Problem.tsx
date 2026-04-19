@@ -32,6 +32,22 @@ export function Problem() {
             ambient awareness of performance velocity. Nothing tells them something is wrong
             unless they go looking — or wait a week.
           </p>
+
+          <p className="mono problem__tag problem__tag--second">Core assumption</p>
+          <p className="problem__p">
+            I'm assuming developers open the dashboard to glance at how things are going, not
+            to go hunting for a specific problem. If that's wrong, the whole direction needs
+            rethinking. I'm betting on the dashboard being used as a daily pulse-check.
+          </p>
+
+          <aside className="problem__keep">
+            <span className="mono problem__keep-tag">Keep in mind</span>
+            <p className="problem__keep-text">
+              Full set of assumptions and hypotheses — one per variant — lives in the live
+              prototype's design doc. Press <kbd>⌘</kbd><kbd>←</kbd> anywhere inside the app
+              to open it.
+            </p>
+          </aside>
         </div>
       </div>
     </section>

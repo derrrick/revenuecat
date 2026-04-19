@@ -35,6 +35,40 @@ function PickerAutoOpen() {
   return null;
 }
 
+/** Preselects a dashboard variant when a process-reel card deep-links via
+ *  ?v=baseline|a|b|c. Strips the param once applied so refreshes don't
+ *  override a user's subsequent ⌘V choice. */
+function VariantAutoSelect() {
+  const { setVersion } = useVersion();
+  const { pathname, search } = useLocation();
+  const navigate = useNavigate();
+  const firedRef = useRef(false);
+
+  useEffect(() => {
+    if (firedRef.current) return;
+    const params = new URLSearchParams(search);
+    const v = params.get("v");
+    if (!v) return;
+
+    const map: Record<string, "Baseline" | "A" | "B" | "C"> = {
+      baseline: "Baseline",
+      a: "A",
+      b: "B",
+      c: "C",
+    };
+    const resolved = map[v.toLowerCase()];
+    if (!resolved) return;
+
+    firedRef.current = true;
+    setVersion(resolved);
+    params.delete("v");
+    const nextSearch = params.toString();
+    navigate(pathname + (nextSearch ? `?${nextSearch}` : ""), { replace: true });
+  }, [search, pathname, setVersion, navigate]);
+
+  return null;
+}
+
 function AppRoutes() {
   useVersionHotkey();
   const { pathname } = useLocation();
@@ -83,6 +117,7 @@ function AppRoutes() {
       {!isPresentation && (
         <>
           <PickerAutoOpen />
+          <VariantAutoSelect />
           <VersionPicker />
           <VersionHint />
           <ContextBlade open={bladeOpen} onClose={closeBlade} />

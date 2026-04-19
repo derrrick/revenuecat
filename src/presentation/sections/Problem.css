@@ -46,6 +46,57 @@
 .problem__emphasis-lede {
   color: var(--rc-red);
 }
+.problem__tag--second {
+  margin-top: 32px;
+}
+.problem__keep {
+  margin: 28px 0 0;
+  padding: 20px 24px;
+  border: 1px solid var(--rule);
+  background: rgba(31, 31, 71, 0.025);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 52ch;
+  position: relative;
+  overflow: hidden;
+}
+.problem__keep::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--ink-muted);
+  opacity: 0.4;
+}
+.problem__keep-tag {
+  color: var(--rc-blue);
+  letter-spacing: 0.14em;
+}
+.problem__keep-text {
+  font-family: var(--pres-font-display);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  font-weight: 500;
+  margin: 0;
+  max-width: 64ch;
+  letter-spacing: -0.01em;
+}
+.problem__keep-text kbd {
+  font-family: var(--pres-font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  padding: 2px 6px;
+  margin: 0 2px;
+  border-radius: 4px;
+  background: rgba(31, 31, 71, 0.08);
+  border: 1px solid var(--rule);
+  color: var(--ink-strong);
+  letter-spacing: 0;
+  vertical-align: middle;
+}
 
 @media (max-width: 900px) {
   .problem__body { grid-template-columns: 1fr; gap: 48px; }

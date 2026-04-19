@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { OverviewVariantBaseline } from "../../screens/variants/OverviewVariantBaseline";
 import { OverviewVariantA } from "../../screens/variants/OverviewVariantA";
@@ -11,6 +12,7 @@ const CARDS = [
   {
     idx: "00",
     name: "Baseline",
+    href: "/overview?v=baseline",
     verdict: { label: "Provided", kind: "given" },
     accent: "var(--ink-muted)",
     headline: "Status Quo",
@@ -22,9 +24,10 @@ const CARDS = [
   {
     idx: "A",
     name: "Option A",
+    href: "/overview?v=a",
     verdict: { label: "Iteration 1", kind: "iteration" },
     accent: "var(--rc-red)",
-    headline: "Enhanced cards",
+    headline: "Insights pulse + diff pills",
     body: "WoW deltas inline on existing tiles, a collapsible Insights Pulse panel below. A familiar upgrade that tinkers at the edges.",
     tag: "Why it failed",
     bodyExtra: "I liked the pulse idea, but I think it is too de-emphasized. I ended up keeping the diff pills.",
@@ -33,6 +36,7 @@ const CARDS = [
   {
     idx: "B",
     name: "Option B",
+    href: "/overview?v=b",
     verdict: { label: "Iteration 2", kind: "iteration" },
     accent: "var(--rc-blue)",
     headline: "Predictive forecast",
@@ -44,6 +48,7 @@ const CARDS = [
   {
     idx: "C",
     name: "Option C",
+    href: "/overview?v=c",
     verdict: { label: "Selected", kind: "selected" },
     accent: "var(--rc-green)",
     headline: "Signal Layer",
@@ -107,7 +112,7 @@ export function ProcessReel() {
 
       <div className="process__track" ref={trackRef}>
         {CARDS.map((card) => (
-          <article className="process__card" key={card.idx}>
+          <Link to={card.href} className="process__card" key={card.idx} aria-label={`Open ${card.name} in the live prototype`}>
             <header className="process__card-head">
               <div className="process__card-idx">
                 <span className="process__card-dot" style={{ background: card.accent }} />
@@ -134,8 +139,9 @@ export function ProcessReel() {
                   <p>{card.bodyExtra}</p>
                 </div>
               )}
+              <span className="process__card-cta mono">View in prototype</span>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
     </section>

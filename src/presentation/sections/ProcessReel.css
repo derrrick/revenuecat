@@ -55,6 +55,40 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 180ms ease, box-shadow 220ms ease, transform 220ms ease, background-color 180ms ease;
+}
+@media (hover: hover) {
+  .process__card:hover {
+    border-color: rgba(31, 31, 71, 0.28);
+    background: #FFFFFF;
+    box-shadow: 0 20px 50px rgba(31, 31, 71, 0.09);
+    transform: translateY(-2px);
+  }
+  .process__card:hover .process__card-cta {
+    color: var(--rc-blue);
+  }
+  .process__card:hover .process__card-cta::after {
+    transform: translateX(3px);
+  }
+}
+.process__card:active {
+  background: #FFFFFF;
+  border-color: rgba(31, 31, 71, 0.28);
+}
+.process__card-cta {
+  margin-top: 12px;
+  color: var(--ink-muted);
+  transition: color 180ms ease;
+  align-self: flex-start;
+}
+.process__card-cta::after {
+  content: "→";
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.1, 1);
 }
 .process__card-body {
   flex: 1;
