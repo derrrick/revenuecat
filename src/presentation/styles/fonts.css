@@ -1,0 +1,8 @@
+/* Fonts for the editorial presentation layer only.
+   Dashboard routes keep PP Object Sans via ../../styles/fonts.css. */
+
+/* Satoshi (body + most UI) — via Fontshare */
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900,400i,500i&display=swap");
+
+/* Fraunces (display headlines) + JetBrains Mono (labels) — via Google */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&display=swap");

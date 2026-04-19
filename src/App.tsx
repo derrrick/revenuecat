@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Overview } from "./screens/Overview";
 import { Revenue } from "./screens/Revenue";
 import { AppShell } from "./components/organisms/AppShell";
@@ -7,9 +7,12 @@ import { ContextBlade } from "./components/organisms/ContextBlade";
 import { VersionProvider } from "./version/VersionContext";
 import { VersionPicker, VersionHint } from "./version/VersionPicker";
 import { useVersionHotkey } from "./version/useVersionHotkey";
+import { Presentation } from "./presentation/Presentation";
 
-function RootShell() {
+function AppRoutes() {
   useVersionHotkey();
+  const { pathname } = useLocation();
+  const isPresentation = pathname === "/" || pathname.startsWith("/proposal");
   const [bladeOpen, setBladeOpen] = useState(false);
   const closeBlade = useCallback(() => setBladeOpen(false), []);
   const toggleBlade = useCallback(() => setBladeOpen((o) => !o), []);
@@ -44,16 +47,20 @@ function RootShell() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<Presentation />} />
         <Route element={<AppShell />}>
-          <Route path="/" element={<Navigate to="/overview" replace />} />
           <Route path="/overview" element={<Overview />} />
           <Route path="/charts" element={<Navigate to="/charts/revenue" replace />} />
           <Route path="/charts/:chart" element={<Revenue />} />
         </Route>
       </Routes>
-      <VersionPicker />
-      <VersionHint />
-      <ContextBlade open={bladeOpen} onClose={closeBlade} />
+      {!isPresentation && (
+        <>
+          <VersionPicker />
+          <VersionHint />
+          <ContextBlade open={bladeOpen} onClose={closeBlade} />
+        </>
+      )}
     </>
   );
 }
@@ -61,7 +68,7 @@ function RootShell() {
 export default function App() {
   return (
     <VersionProvider>
-      <RootShell />
+      <AppRoutes />
     </VersionProvider>
   );
 }

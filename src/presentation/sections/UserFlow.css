@@ -1,0 +1,91 @@
+.userflow {
+  padding: 72px 0 140px;
+  background: var(--bg-muted);
+}
+.userflow__intro {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 80px;
+  padding-top: 72px;
+  padding-bottom: 64px;
+  align-items: end;
+}
+.userflow__title {
+  font-family: var(--pres-font-display);
+  font-size: var(--text-section);
+  line-height: 1.05;
+  margin: 0;
+  letter-spacing: -0.02em;
+  color: var(--ink-strong);
+  font-weight: 400;
+  max-width: 14ch;
+}
+.userflow__intro p {
+  color: var(--ink-soft);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 44ch;
+  padding-bottom: 10px;
+}
+
+.userflow__track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  list-style: none;
+  padding-left: var(--edge);
+  padding-right: var(--edge);
+  margin: 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.userflow__step {
+  padding: 36px 28px 44px 28px;
+  border-left: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.userflow__step:first-child { padding-left: 0; border-left: none; }
+.userflow__step:last-child { padding-right: 0; }
+.userflow__step-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.userflow__step-num {
+  font-family: var(--pres-font-display);
+  font-size: clamp(56px, 5.6vw, 88px);
+  line-height: 1;
+  color: var(--rc-red);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+}
+.userflow__step-surface {
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+.userflow__step-head-title {
+  font-family: var(--pres-font-display);
+  font-size: var(--text-card);
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.02em;
+  color: var(--ink-strong);
+  font-weight: 400;
+}
+.userflow__step p {
+  color: var(--ink-soft);
+  font-size: var(--text-small);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 36ch;
+}
+
+@media (max-width: 900px) {
+  .userflow__intro { grid-template-columns: 1fr; gap: 24px; }
+  .userflow__track { grid-template-columns: 1fr; padding: 0 var(--edge); }
+  .userflow__step { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-right: 0; }
+  .userflow__step:first-child { border-top: none; }
+}

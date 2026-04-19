@@ -1,0 +1,43 @@
+.variant-canvas {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--surface-root, #F0F2F6);
+  box-shadow: 0 20px 60px rgba(20, 19, 16, 0.25), 0 0 0 0.5px rgba(20, 19, 16, 0.1);
+  isolation: isolate;
+}
+
+.variant-canvas__inner {
+  transform-origin: top left;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--surface-root, #F0F2F6);
+  padding: 8px;
+}
+
+/* Scoped reset to the dashboard's tokens so the variant renders in its own voice. */
+.variant-canvas [data-scope="app"],
+.variant-canvas__inner {
+  font-family: "PP Object Sans", Inter, sans-serif;
+  font-variant-numeric: tabular-nums;
+  color: #09090D;
+}
+
+.variant-canvas__paper {
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  border-radius: 10px;
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.10),
+    0 0.5px 0 0 rgba(0, 0, 0, 0.05),
+    0 0 0 0.5px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+

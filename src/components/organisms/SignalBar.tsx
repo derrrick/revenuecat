@@ -7,6 +7,9 @@ type Mode = "signal" | "healthy" | "skeleton";
 
 type Props = {
   emptyMode?: boolean;   // renders the "gathering data" skeleton state
+  /** Optional external override used by the presentation layer to showcase
+   *  specific states side-by-side. Does not affect normal dashboard flow. */
+  forceMode?: Mode;
 };
 
 /**
@@ -18,17 +21,19 @@ type Props = {
  * - Smooth 180ms fade + slide when signals swap — small, deliberate craft
  *   touch since the bar is the hero of this variant.
  */
-export function SignalBar({ emptyMode }: Props) {
+export function SignalBar({ emptyMode, forceMode }: Props) {
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
 
   const current: Signal | undefined = RANKED_SIGNALS[index];
-  const mode: Mode = emptyMode
-    ? "skeleton"
-    : current
-      ? "signal"
-      : "healthy";
+  const mode: Mode = forceMode ?? (
+    emptyMode
+      ? "skeleton"
+      : current
+        ? "signal"
+        : "healthy"
+  );
 
   const dismiss = useCallback(() => {
     setLeaving(true);
@@ -96,8 +101,9 @@ export function SignalBar({ emptyMode }: Props) {
             <p className="sb__headline">All metrics within normal range</p>
             <p className="sb__sentence">Nothing unusual vs your 30-day baseline over the last 7 days.</p>
           </div>
-          <button className="sb__reset" onClick={reset} type="button">
-            Reset demo signals
+          <button className="sb__cta" onClick={reset} type="button">
+            <span>View signal history</span>
+            <span className="sb__cta-arrow" aria-hidden>→</span>
           </button>
         </div>
       </section>
