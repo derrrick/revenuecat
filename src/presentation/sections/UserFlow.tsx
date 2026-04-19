@@ -3,25 +3,25 @@ import "./UserFlow.css";
 const STEPS = [
   {
     n: "01",
-    head: "Detection — omni-present",
+    head: "Detect",
     body: "Trial CVR drifts outside its normal range. Slack fires in the same minute: \"Trial CVR is down 4.5% — unusual for this period.\" The developer doesn't have to be looking.",
-    surface: "Slack / Email",
+    surface: "Slack, Email, Mobile",
   },
   {
     n: "02",
-    head: "Scan — dashboard entry",
+    head: "Scan",
     body: "Developer opens the dashboard. Signal Bar is the first thing they see. One ranked signal, one sentence, one action link. No scanning six cards to find what moved.",
     surface: "Overview",
   },
   {
     n: "03",
-    head: "Investigate — deep link",
-    body: "\"View Trial CVR →\" lands them on the pre-filtered Chart view, scoped to the moment it happened. Suggested actions are offered to provide actionable next steps and ideas.",
+    head: "Investigate",
+    body: "\"View in charts →\" lands them on the pre-filtered Chart view, scoped to the moment it happened. Suggested actions are offered to provide actionable next steps and ideas.",
     surface: "Charts",
   },
   {
     n: "04",
-    head: "Dismiss — signal resolved",
+    head: "Resolve",
     body: "Reviewed or marked. Signal Bar moves to the next-ranked signal — or returns to healthy. A recovery notification fires when the metric is back in range.",
     surface: "Overview",
   },
@@ -32,7 +32,7 @@ export function UserFlow() {
     <section className="pres-section userflow">
       <div className="pres-section-label">
         <span className="idx">04 / User flow</span>
-        <span className="ttl">Detect → scan → investigate → dismiss</span>
+        <span className="ttl">Detect → scan → investigate → resolve</span>
       </div>
 
       <div className="userflow__intro edge">
