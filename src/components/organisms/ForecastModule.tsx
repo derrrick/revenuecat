@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { FORECAST } from "../../data/signals";
 import "./ForecastModule.css";
 
@@ -17,8 +17,47 @@ export function ForecastModule() {
   const maxY = Math.max(...values) * (1 + confidenceBandPct / 100);
   const minY = Math.min(...values) * (1 - confidenceBandPct / 100);
 
-  const W = 640;
-  const H = 190;
+  // Track actual chart dimensions so the SVG viewBox matches the container's
+  // rendered aspect exactly — avoids the horizontal-squish that came from
+  // preserveAspectRatio="none" stretching a fixed 640x190 viewBox into an
+  // arbitrary container size.
+  const chartRef = useRef<HTMLDivElement>(null);
+  const [size, setSize] = useState({ w: 640, h: 190 });
+
+  useLayoutEffect(() => {
+    const el = chartRef.current;
+    if (!el) return;
+
+    const measure = () => {
+      const rect = el.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        setSize((prev) => {
+          const w = Math.round(rect.width);
+          const h = Math.round(rect.height);
+          return prev.w === w && prev.h === h ? prev : { w, h };
+        });
+      }
+    };
+
+    measure();
+
+    // ResizeObserver catches parent layout changes, window resize covers viewport
+    // changes, and a low-frequency interval is a safety net for sandboxed browser
+    // environments where RO doesn't fire reliably.
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(measure) : null;
+    ro?.observe(el);
+    window.addEventListener("resize", measure);
+    const id = window.setInterval(measure, 300);
+
+    return () => {
+      ro?.disconnect();
+      window.removeEventListener("resize", measure);
+      clearInterval(id);
+    };
+  }, []);
+
+  const W = size.w;
+  const H = size.h;
   const padL = 36;
   const padR = 12;
   const padT = 14;
@@ -82,8 +121,8 @@ export function ForecastModule() {
       </header>
 
       <div className="fc__body">
-        <div className="fc__chart">
-          <svg viewBox={`0 0 ${W} ${H}`} width="100%" height={H} preserveAspectRatio="none">
+        <div className="fc__chart" ref={chartRef}>
+          <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" preserveAspectRatio="none" style={{ display: "block" }}>
             {/* Gridlines */}
             {yTicks.map((v, i) => (
               <line

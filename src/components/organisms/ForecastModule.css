@@ -81,6 +81,9 @@
   background: var(--surface-primary);
   border-radius: 8px;
   overflow: hidden;
+  width: 100%;
+  min-width: 0;
+  min-height: 160px;
 }
 
 .fc__tick {
